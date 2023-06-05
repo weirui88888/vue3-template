@@ -1,0 +1,17 @@
+@mixin button-clear {
+  border: 0;
+  background: transparent;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  min-width: 100px;
+  color: inherit;
+  cursor: pointer;
+}
+
+@mixin button-basis($background: $color-basis, $height: 50px, $color: $color-font-basis, $radius: 5px) {
+  height: $height;
+  border-radius: $radius;
+  background: $background;
+  color: $color;
+}

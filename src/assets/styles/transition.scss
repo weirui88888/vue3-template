@@ -1,0 +1,14 @@
+@mixin vue-transitions-opacity($duration: 0.3s, $enter: 0, $leave: 0) {
+  .opacity-enter-active,
+  .opacity-leave-active {
+    transition: opacity $duration ease-in-out;
+  }
+
+  .opacity-enter {
+    opacity: $enter;
+  }
+
+  .opacity-leave-active {
+    opacity: $leave;
+  }
+}
