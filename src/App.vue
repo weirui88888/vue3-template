@@ -6,8 +6,12 @@ const show = ref(false)
 
 <template>
   <div>
-    <div class="you" v-if="show">你</div>
-    <button @click="show = !show" class="btn">hello</button>
+    <div v-if="show" class="you">
+      你
+    </div>
+    <button class="btn" @click="show = !show">
+      hello
+    </button>
   </div>
 </template>
 
