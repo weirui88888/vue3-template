@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import HelloWorld from '@comps/HelloWorld.vue'
 
 const show = ref(false)
 </script>
 
 <template>
   <div>
+    <HelloWorld />
     <div v-if="show" class="you">
       你
     </div>

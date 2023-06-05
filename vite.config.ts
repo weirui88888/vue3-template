@@ -1,13 +1,20 @@
-import path from 'node:path'
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import UnoCSS from 'unocss/vite'
 import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
   plugins: [vue(), UnoCSS()],
+  server: {
+    host: true,
+    port: 8686,
+    open: true,
+  },
   resolve: {
+    // 别名，这边添加完之后，需要在tsconfig.json中path进行配置
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      '@': resolve(__dirname, './src'),
+      '@comps': resolve(__dirname, './src/components'),
     },
   },
   css: {
