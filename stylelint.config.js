@@ -11,6 +11,7 @@ module.exports = {
     'at-rule-no-unknown': [true, {
       ignoreAtRules: ['include', 'mixin']
     }],
+    'import-notation': 'string',
     'max-empty-lines': 1,
     'block-opening-brace-space-before': 'always',
     'block-closing-brace-empty-line-before': ['never']
