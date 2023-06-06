@@ -53,6 +53,7 @@ export class Request {
           default:
             message = `连接出错(${err.response?.status})!`
         }
+        console.warn(message)
         return Promise.reject(err.response)
       }
     )

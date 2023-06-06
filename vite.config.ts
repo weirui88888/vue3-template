@@ -4,16 +4,44 @@ import UnoCSS from 'unocss/vite'
 import vue from '@vitejs/plugin-vue'
 import { createHtmlPlugin } from 'vite-plugin-html'
 
+import { visualizer } from 'rollup-plugin-visualizer'
+
+// analyzer
+import externalGlobals from 'rollup-plugin-external-globals' // external cdn
+
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
+  const injectScript = mode === 'development'
+    ? ''
+    : `<script src="https://cdn.jsdelivr.net/npm/vue@3.2.20/dist/vue.global.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/axios@0.24.0/dist/axios.min.js"></script>`
   return {
     plugins: [vue(), UnoCSS(), createHtmlPlugin({
       inject: {
         data: {
-          title: env.VITE_APP_TITLE
+          title: `${env.VITE_APP_TITLE}`,
+          injectScript
         }
       }
+    }), visualizer({
+      gzipSize: true,
+      brotliSize: true,
+      emitFile: false,
+      filename: 'analyzer.html',
+      open: true
     })],
+    base: './',
+    build: {
+      rollupOptions: {
+        external: ['vue', 'vuex', 'axios', 'vue-router'],
+        plugins: [
+          externalGlobals({
+            vue: 'Vue',
+            axios: 'axios'
+          })
+        ]
+      }
+    },
     server: {
       host: true,
       port: 8686,

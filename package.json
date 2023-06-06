@@ -28,6 +28,8 @@
     "postcss": "^8.4.24",
     "postcss-html": "^1.5.0",
     "postcss-scss": "^4.0.6",
+    "rollup-plugin-external-globals": "^0.8.0",
+    "rollup-plugin-visualizer": "^5.9.0",
     "sass": "^1.62.1",
     "stylelint": "^15.7.0",
     "stylelint-config-recess-order": "^4.1.0",
