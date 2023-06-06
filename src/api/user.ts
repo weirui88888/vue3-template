@@ -1,8 +1,11 @@
 import request from './request'
 
-const getUser = () => {
-  return request.get('/v4/users/me')
+interface User {
+  name?: string
+  bio?: string
+  id?: string
 }
-export {
-  getUser
+
+export const getUser = () => {
+  return request.get<User>('/v4/users/me')
 }

@@ -1,20 +1,14 @@
 import axios from 'axios'
-import type { AxiosInstance, AxiosRequestConfig, AxiosRequestHeaders, AxiosResponse } from 'axios'
+import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosRequestHeaders, AxiosResponse } from 'axios'
 
 interface AdaptAxiosRequestConfig extends AxiosRequestConfig {
   headers: AxiosRequestHeaders
 }
 
-interface Result<T> {
-  code: number
-  message: string
-  result: T
-}
-
 export class Request {
   instance: AxiosInstance
 
-  baseConfig: AxiosRequestConfig = { timeout: 30000, responseType: 'json' }
+  baseConfig: AxiosRequestConfig = { baseURL: import.meta.env.VITE_APP_SERVICES_GATEWAY_BASE_URL, timeout: 30000, responseType: 'json' }
 
   constructor(config: AxiosRequestConfig) {
     this.instance = axios.create(Object.assign(this.baseConfig, config))
@@ -34,11 +28,12 @@ export class Request {
 
     this.instance.interceptors.response.use(
       (res: AxiosResponse) => {
-        return res
+        return res.data
       },
-      (err: any) => {
+      (err: AxiosError) => {
         let message = ''
-        switch (err.response.status) {
+        console.warn(err.response?.data)
+        switch (err.response!.status) {
           case 400:
             message = '请求错误(400)'
             break
@@ -56,7 +51,7 @@ export class Request {
             break
           case 500:
           default:
-            message = `连接出错(${err.response.status})!`
+            message = `连接出错(${err.response?.status})!`
         }
         return Promise.reject(err.response)
       }
@@ -70,7 +65,7 @@ export class Request {
   public get<T = any>(
     url: string,
     config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<Result<T>>> {
+  ): Promise<T> {
     return this.instance.get(url, config)
   }
 
@@ -78,7 +73,7 @@ export class Request {
     url: string,
     data?: any,
     config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<Result<T>>> {
+  ): Promise<T> {
     return this.instance.post(url, data, config)
   }
 
@@ -86,14 +81,14 @@ export class Request {
     url: string,
     data?: any,
     config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<Result<T>>> {
+  ): Promise<T> {
     return this.instance.put(url, data, config)
   }
 
   public delete<T = any>(
     url: string,
     config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<Result<T>>> {
+  ): Promise<T> {
     return this.instance.delete(url, config)
   }
 }
