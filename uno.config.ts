@@ -1,6 +1,14 @@
-// uno.config.ts
-import { defineConfig } from 'unocss'
+import { defineConfig, presetAttributify, presetUno } from 'unocss'
+import transformerVariantGroup from '@unocss/transformer-variant-group'
+import transformerDirectives from '@unocss/transformer-directives'
 
 export default defineConfig({
-  rules: [['m-1', { margin: '1px' }]],
+  presets: [
+    presetAttributify(),
+    presetUno({
+      variablePrefix: 'butter-',
+      attributifyPseudo: true
+    })
+  ],
+  transformers: [transformerVariantGroup(), transformerDirectives()]
 })

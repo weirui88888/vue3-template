@@ -8,21 +8,21 @@ export default defineConfig({
   server: {
     host: true,
     port: 8686,
-    open: true,
+    open: true
   },
   resolve: {
     // 别名，这边添加完之后，需要在tsconfig.json中path进行配置
     alias: {
       '@': resolve(__dirname, './src'),
-      '@comps': resolve(__dirname, './src/components'),
-    },
+      '@comps': resolve(__dirname, './src/components')
+    }
   },
   css: {
     preprocessorOptions: {
       // 页面中注入scss变量，避免在用的页面中重复引入冗余问题
       scss: {
-        additionalData: '@import "@/assets/styles/variable.scss";',
-      },
-    },
-  },
+        additionalData: '@import "@/assets/styles/variable.scss";'
+      }
+    }
+  }
 })
