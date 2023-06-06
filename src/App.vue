@@ -22,7 +22,7 @@ const show = ref(false)
 </template>
 
 <style scoped lang="scss">
-@import "@/assets/styles/mixin.scss";
+@import url('@/assets/styles/mixin.scss');
 
 .you {
   color: $color-basis;
