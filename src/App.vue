@@ -3,8 +3,8 @@
 </script>
 
 <template>
-  <div class="text-center py-4">
-    hello
+  <div class="text-center py-4 font-sans text-12">
+    hello，what i can do for you?
   </div>
 </template>
 
