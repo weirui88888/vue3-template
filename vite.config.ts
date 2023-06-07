@@ -13,8 +13,10 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
   const injectScript = mode === 'development'
     ? ''
-    : `<script src="https://cdn.jsdelivr.net/npm/vue@3.2.20/dist/vue.global.min.js"></script>
-       <script src="https://cdn.jsdelivr.net/npm/axios@0.24.0/dist/axios.min.js"></script>`
+    : `<script src="https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/axios@1.4.0/dist/axios.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/vue-demi@0.13.1/lib/index.iife.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/pinia@2.1.3/dist/pinia.iife.min.js"></script>`
   return {
     plugins: [vue(), UnoCSS(), createHtmlPlugin({
       inject: {
@@ -37,7 +39,8 @@ export default defineConfig(({ mode }) => {
         plugins: [
           externalGlobals({
             vue: 'Vue',
-            axios: 'axios'
+            axios: 'axios',
+            pinia: 'Pinia'
           })
         ]
       }

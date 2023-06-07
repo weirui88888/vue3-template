@@ -1,9 +1,9 @@
 import request from './request'
 
 interface User {
-  name?: string
-  bio?: string
-  id?: string
+  name: string
+  bio: string
+  id: string
 }
 
 export const getUser = () => {
