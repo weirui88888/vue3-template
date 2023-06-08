@@ -16,7 +16,7 @@ module.exports = {
     'block-opening-brace-space-before': 'always',
     'block-closing-brace-empty-line-before': ['never']
   },
-  ignoreFiles: ['**/*.js', '**/*.ts', '**/*.md'],
+  ignoreFiles: ['**/*.js', '**/*.ts', '**/*.md', 'analyzer.html'],
   overrides: [
     {
       files: ['*.vue', '**/*.vue', '*.html', '**/*.html'],

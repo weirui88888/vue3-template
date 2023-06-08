@@ -1,10 +1,20 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { pick } from 'lodash-es'
 import { getUser } from './api/user'
 import { useUser } from './store/user'
+import HelloWorld from './components/HelloWorld.vue'
 
 const userPinia = useUser()
 const printHelloString = ref('')
+
+const person = {
+  name: 'Larry',
+  age: 23,
+  gender: 'male'
+}
+
+const pickName = ref(pick(person, 'name'))
 
 onMounted(async () => {
   const user = await getUser()
@@ -18,12 +28,16 @@ onMounted(async () => {
 
 <template>
   <div>
-    <div class="text-center py-4 font-sans text-16">
+    <div class="text-center py-4 font-sans text-16px">
       hello，what i can do for you?
     </div>
     <div class="text-center py-4 font-sans text-4">
       {{ printHelloString }}
     </div>
+    <div class="text-center py-4 font-sans text-4">
+      {{ pickName }}
+    </div>
+    <HelloWorld />
   </div>
 </template>
 

@@ -1,14 +1,11 @@
 <script setup lang="ts">
+import { camelCase } from 'lodash-es'
+
+const uniqueId = camelCase('Hello World')
 </script>
 
 <template>
-  <div />
+  <div class="font-unique text-center">
+    {{ uniqueId }}
+  </div>
 </template>
-
-<style scoped lang="scss">
-div {
-  font-size: 4px;
-  color: #ff0000;
-  border: 1px solid #008000;
-}
-</style>

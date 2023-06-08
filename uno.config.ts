@@ -14,7 +14,8 @@ export default defineConfig({
     presetWebFonts({
       provider: 'google',
       fonts: {
-        sans: 'Indie Flower'
+        sans: 'Indie Flower',
+        unique: 'Chokokutai'
       }
     })
   ],

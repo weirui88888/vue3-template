@@ -3,7 +3,7 @@ import { defineConfig, loadEnv } from 'vite'
 import UnoCSS from 'unocss/vite'
 import vue from '@vitejs/plugin-vue'
 
-import legacy from '@vitejs/plugin-legacy'
+// import legacy from '@vitejs/plugin-legacy'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import { visualizer } from 'rollup-plugin-visualizer'
 
@@ -36,15 +36,24 @@ export default defineConfig(({ mode }) => {
         emitFile: false,
         filename: 'analyzer.html',
         open: true
-      }),
-      legacy({
-        targets: ['defaults', 'iOS >= 14']
       })
+      // legacy({ // 低版本兼容
+      //   targets: ['defaults', 'iOS >= 14']
+      // })
     ],
     base: './',
     build: {
       rollupOptions: {
+        output: {
+          // 拆包
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              return 'vendor'
+            }
+          }
+        },
         plugins: [
+          // 避免将这些文件打包到bundle中，使用cdn的方式
           externalGlobals({
             vue: 'Vue',
             axios: 'axios',
