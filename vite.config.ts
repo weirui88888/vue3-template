@@ -2,8 +2,9 @@ import { resolve } from 'node:path'
 import { defineConfig, loadEnv } from 'vite'
 import UnoCSS from 'unocss/vite'
 import vue from '@vitejs/plugin-vue'
-import { createHtmlPlugin } from 'vite-plugin-html'
 
+import legacy from '@vitejs/plugin-legacy'
+import { createHtmlPlugin } from 'vite-plugin-html'
 import { visualizer } from 'rollup-plugin-visualizer'
 
 // analyzer
@@ -13,29 +14,36 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
   const injectScript = mode === 'development'
     ? ''
-    : `<script src="https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.min.js"></script>
+    : `<script src="https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.prod.js"></script>
        <script src="https://cdn.jsdelivr.net/npm/axios@1.4.0/dist/axios.min.js"></script>
        <script src="https://cdn.jsdelivr.net/npm/vue-demi@0.13.1/lib/index.iife.min.js"></script>
        <script src="https://cdn.jsdelivr.net/npm/pinia@2.1.3/dist/pinia.iife.min.js"></script>`
   return {
-    plugins: [vue(), UnoCSS(), createHtmlPlugin({
-      inject: {
-        data: {
-          title: `${env.VITE_APP_TITLE}`,
-          injectScript
+    plugins: [
+      vue(),
+      UnoCSS(),
+      createHtmlPlugin({
+        inject: {
+          data: {
+            title: `${env.VITE_APP_TITLE}`,
+            injectScript
+          }
         }
-      }
-    }), visualizer({
-      gzipSize: true,
-      brotliSize: true,
-      emitFile: false,
-      filename: 'analyzer.html',
-      open: true
-    })],
+      }),
+      visualizer({
+        gzipSize: true,
+        brotliSize: true,
+        emitFile: false,
+        filename: 'analyzer.html',
+        open: true
+      }),
+      legacy({
+        targets: ['defaults', 'iOS >= 14']
+      })
+    ],
     base: './',
     build: {
       rollupOptions: {
-        external: ['vue', 'vuex', 'axios', 'vue-router'],
         plugins: [
           externalGlobals({
             vue: 'Vue',

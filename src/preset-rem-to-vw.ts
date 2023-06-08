@@ -23,9 +23,7 @@ export default function remToVwPreset(options: RemToVmOptions = {}): Preset {
       util.entries.forEach((i) => {
         const value = i[1]
         if (typeof value === 'string' && remRE.test(value)) {
-          i[1] = value.replace(remRE, (_, p1) => {
-            return `${preciseNumber(p1 * 4 * 100 / baseDivisor, precision)}vw`
-          })
+          i[1] = value.replace(remRE, (_, p1) => `${preciseNumber(p1 * 4 * 100 / baseDivisor, precision)}vw`)
         }
       })
     }
