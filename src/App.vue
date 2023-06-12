@@ -31,7 +31,7 @@ onMounted(async () => {
     <div class="text-center py-4 font-sans text-16px">
       hello，what i can do for you?
     </div>
-    <div class="text-center py-4 font-sans text-4">
+    <div class="py-4 text-center font-sans text-4 animate__animated animate__backOutRight animate__bounce">
       {{ printHelloString }}
     </div>
     <div class="text-center py-4 font-sans text-4">

@@ -14,7 +14,8 @@ module.exports = {
     'import-notation': 'string',
     'max-empty-lines': 1,
     'block-opening-brace-space-before': 'always',
-    'block-closing-brace-empty-line-before': ['never']
+    'block-closing-brace-empty-line-before': ['never'],
+    'selector-class-pattern': null
   },
   ignoreFiles: ['**/*.js', '**/*.ts', '**/*.md', 'analyzer.html'],
   overrides: [
